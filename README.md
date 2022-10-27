@@ -2,7 +2,7 @@
 
 # Discovery
 
-An app to generate knowledge maps from a single keyword.
+An ai app to generate knowledge maps from a single keyword.
 
 ## How does it work?
 
