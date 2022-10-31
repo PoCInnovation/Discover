@@ -1,8 +1,8 @@
 > If you see this section, you've just created a repository using [PoC Innovation's Open-Source project template](https://github.com/PoCInnovation/open-source-project-template). Check the [getting started guide](./.github/getting-started.md).
 
-# [PROJECT'S NAME]
+# Discovery
 
-[Project's description]
+An app to generate knowledge maps from a single keyword.
 
 ## How does it work?
 
@@ -31,11 +31,11 @@ If you're interested in how the project is organized at a higher level, please c
 ## Our PoC team :heart:
 
 Developers
-| [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy) | [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy) | [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy)
+| [<img src="https://github.com/Azzzen.png?size=85" width=85><br><sub>Axel ZENINE</sub>](https://github.com/Azzzen) | [<img src="https://github.com/agherasie.png?size=85" width=85><br><sub>Alex GHERASIE</sub>](https://github.com/agherasie) | [<img src="https://github.com/tipbs.png?size=85" width=85><br><sub>Thibaut DEGODENNE</sub>](https://github.com/tipbs)
 | :---: | :---: | :---: |
 
 Manager
-| [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>[Manager's name]</sub>](https://github.com/adrienfort)
+| [<img src="https://github.com/LayBraid.png?size=85" width=85><br><sub>Clément LOEUILLET</sub>](https://github.com/LayBraid)
 | :---: |
 
 <h2 align=center>
