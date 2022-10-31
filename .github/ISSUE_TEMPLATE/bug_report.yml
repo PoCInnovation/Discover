@@ -3,7 +3,9 @@ description: File a bug report
 title: "[Bug]: "
 labels: ["bug", "triage"]
 assignees:
-  - adrienfort # Update it
+  - agherasie
+  - Azzzen
+  - Tipbs
 body:
   - type: markdown
     attributes:
