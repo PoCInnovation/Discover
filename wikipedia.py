@@ -1,3 +1,6 @@
+# RUN THIS FILE WITH 
+# streamlit run wikipedia.py
+
 from wikipediaapi import Wikipedia
 import streamlit as st
 from nltk import word_tokenize
