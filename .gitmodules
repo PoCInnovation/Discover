@@ -1,0 +1,3 @@
+[submodule "wikipedia_summary"]
+	path = wikipedia_summary
+	url = https://huggingface.co/spaces/Tipbs/wikipedia_summary
