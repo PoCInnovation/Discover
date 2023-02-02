@@ -3,6 +3,8 @@
 
 import wikipediaapi as wiki
 import pandas as pd
+import matplotlib.pyplot as plt
+import networkx as nx
 from nltk.tokenize import word_tokenize
 
 def get_page_from_input():
@@ -42,6 +44,15 @@ class Subject():
     """Main class for subjects"""
     def __init__(self, page : wiki.WikipediaPage):
         self.page = page
+        self.subjects = set()
+
+    def fetch_other_subjects_from_eponymal_category(self):
+        category_title = "Category:" + self.page.title
+        if category_title not in self.page.categories:
+            return
+        eponymal_cateogry = self.page.categories[category_title]
+        for member in eponymal_cateogry.categorymembers:
+            self.subjects.add(member)
 
     def from_keyword_to_end_of_sentence(self, index, summary):
         """Returns the end of the sentence of the keyword"""
@@ -55,8 +66,7 @@ class Subject():
         following keywords such as 'is'"""
         keywords = ["is", "are", "was", "were"]
         sentences = []
-        summary = word_tokenize(self.page.summary)
-        print(summary)
+        summary = word_tokenize(self.page.text)
 
         for index, word in enumerate(summary):
             if word in keywords:
@@ -66,17 +76,27 @@ class Subject():
 
         for sentence in sentences:
             sentence_str = ' '.join(sentence).upper()
-            print(f"{sentence_str}: ")
             for link in self.page.links:
                 if sentence_str.find(link.upper()) != -1:
-                    print(f"\t{link}")
-
-        # for sentence in sentences:
-        #     for link in self.page.links:
-        #         if link.title in sentence:
-        #             print(link)
+                    self.subjects.add(link)
 
 wrapper = wiki.Wikipedia('en')
 
 subject = Subject(get_page_from_input())
 subject.fetch_is_keyword()
+subject.fetch_other_subjects_from_eponymal_category()
+
+relations = [
+    {
+        'source': subject.page.title,
+        'target': x,
+        'object': wrapper.page(x)
+    }
+    for x in subject.subjects]
+df_relations = pd.DataFrame(relations)
+G = nx.from_pandas_edgelist(df_relations)
+
+plt.figure(figsize=(10,10))
+pos = nx.kamada_kawai_layout(G)
+nx.draw(G, with_labels=True, node_color='skyblue', edge_cmap=plt.cm.Blues, pos = pos)
+plt.show()
