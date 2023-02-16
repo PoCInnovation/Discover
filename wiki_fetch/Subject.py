@@ -23,17 +23,26 @@ def from_keyword_to_end_of_sentence(index, summary):
 class Subject():
     """Main class for subjects"""
 
-    def __init__(self, page: wiki.WikipediaPage):
+    def __init__(self, page: wiki.WikipediaPage, wrapper: wiki.Wikipedia):
         self.page = page
-        self.subjects = set()
+        self.wrapper = wrapper
+        self.subjects = {}
+
+    def get_category_names(self):
+        category_list = []
+        for category in self.page.categories:
+            category_list.append(category)
+        return category_list
 
     def fetch_other_subjects_from_eponymous_category(self):
         category_title = "Category:" + self.page.title
         if category_title not in self.page.categories:
             return
         eponymous_category = self.page.categories[category_title]
+        if eponymous_category.title not in self.subjects:
+            self.subjects[eponymous_category.title] = set()
         for member in eponymous_category.categorymembers:
-            self.subjects.add(member)
+            self.subjects[eponymous_category.title].add(member)
 
     def fetch_is_keyword(self):
         """Extracts pages which are linked
@@ -52,4 +61,12 @@ class Subject():
             sentence_str = ' '.join(sentence).upper()
             for link in self.page.links:
                 if sentence_str.find(link.upper()) != -1:
-                    self.subjects.add(link)
+                    link_categories = Subject(
+                        self.wrapper.page(link),
+                        self.wrapper).get_category_names()
+                    self_categories = self.get_category_names()
+                    for category in self_categories:
+                        if category not in self.subjects:
+                            self.subjects[category] = set()
+                        if category not in link_categories:
+                            self.subjects[category].add(link)
