@@ -2,3 +2,4 @@ output.txt
 .idea
 processed
 raw
+__pycache__/

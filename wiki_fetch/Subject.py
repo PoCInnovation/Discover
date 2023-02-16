@@ -44,7 +44,7 @@ class Subject():
         for member in eponymous_category.categorymembers:
             self.subjects[eponymous_category.title].add(member)
 
-    def fetch_is_keyword(self):
+    def fetch_is_keyword(self, k):
         """Extracts pages which are linked
         following keywords such as 'is'"""
         keywords = ["is", "are", "was", "were"]
@@ -65,7 +65,9 @@ class Subject():
                         self.wrapper.page(link),
                         self.wrapper).get_category_names()
                     self_categories = self.get_category_names()
-                    for category in self_categories:
+                    for index, category in enumerate(self_categories):
+                        if index > k:
+                            break
                         if category not in self.subjects:
                             self.subjects[category] = set()
                         if category not in link_categories:
